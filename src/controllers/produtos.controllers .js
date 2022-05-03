@@ -37,7 +37,7 @@ async index(req,res){
         const {nome_produto, descricao_produto, qtd_produto, preco_produto} = req.body;
         let data={};
 
-        let produto = await Produto.findOne({descricao_produto});
+        let produto = await Produto.findOne({nome_produto});
         if(produto={}){
             data = {nome_produto,descricao_produto,qtd_produto,preco_produto};
             produto = await Produto.create(data);
