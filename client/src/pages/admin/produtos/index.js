@@ -1,11 +1,16 @@
 import React from 'react';
-
+import Footer from '../../../components/footer-admin';
+import MenuAdmin from'../../../components/menu-admin';
 export default function ProdutosListagem() {
   return (
     <div>
-        <h1>
+        
+      <MenuAdmin/>
+      <h1 >
             Listagem de produtos
-        </h1>
+      </h1>
+      <Footer/>
+        
     </div>
   );
 }
