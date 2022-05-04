@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import MenuAdmin from "../../../components/menu-admin";
@@ -17,6 +17,8 @@ import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Button from '@mui/material/Button';
+import api from '../../../services/api'
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -33,10 +35,36 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
-
 const mdTheme = createTheme();
 
 export default function UsuariosCadastrar() {
+  const [nome,setNome] = useState('');
+  const [email,setEmail] = useState('');
+  const [senha,setSenha] = useState('');
+  const [tipo,setTipo] = useState('');
+
+  async function handleSubmit(){
+      const data={nome_usuario:nome, 
+                  email_usuario:email,
+                  senha_usuario:senha,
+                  tipo_usuario:tipo}
+        if(nome!==''&& email!==''&& senha!==''&&tipo!==''){
+          const response = await api.post('/api/usuarios',data); 
+
+          if(response.status===200){
+            window.location.href='/admin/usuarios'
+    
+          }else{
+            alert('erro ao cadastrar o usuário!');
+          }
+        }else{
+          alert('preencha todos os dados');
+
+        }
+                  
+     
+  }
+
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
@@ -102,8 +130,11 @@ export default function UsuariosCadastrar() {
                       name="nome"
                       label="Nome Completo"
                       fullWidth
-                      autoComplete="given-name"
+                      autoComplete="nome"
                       variant="standard"
+                      value={nome}
+                      onChange={e => setNome(e.target.value)}
+
                     />
                   </Grid>
                   <Grid item xs={6} sm={6}>
@@ -115,6 +146,8 @@ export default function UsuariosCadastrar() {
                       fullWidth
                       autoComplete="email"
                       variant="standard"
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
                     />
                   </Grid>
                   <Grid item xs={6} sm={3}>
@@ -123,8 +156,8 @@ export default function UsuariosCadastrar() {
         <Select
           labelId="tipo"
           id="tipo"
-          //value={age}
-          //onChange={handleChange}
+          value={tipo}
+          onChange={e => setTipo(e.target.value)}
           autoWidth
           label="Tipo"
         >
@@ -147,11 +180,18 @@ export default function UsuariosCadastrar() {
                       fullWidth
                       autoComplete="senha"
                       variant="standard"
+                      value={senha}
+                      onChange={e => setSenha(e.target.value)}
                     />
               
                 
                   </Grid>
                 </Grid>
+                <Grid xs={6} sm={3}>
+                <Button variant="contained" onClick={handleSubmit}>Salvar</Button>
+                </Grid>
+                
+
               </Paper>
             </Grid>
             <Footer sx={{ pt: 4 }} />
