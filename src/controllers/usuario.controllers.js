@@ -1,5 +1,6 @@
 const Usuario = require('../models/usuario.model');
-
+const jwt = require("jsonwebtoken");
+const secret =  "mysecret";
 
 module.exports={
 //mostra todos usuarios
@@ -47,6 +48,28 @@ async index(req,res){
             console.log('deu ruim');
             return res.status(500).json(data);
         }
+    },
+    async login(req,res){
+        
+        const{ email,senha}=req.body;
+        Usuario.findOne({email_usuario:email, tipo_usuario:10}, 
+            function(err,user){
+                if(err){
+                    console.log(error(err))
+                    res.status(200).json({erro: "erro no servidor, por favor tente novamente"})
+                } else if (!user){
+                    res.status(200).json({status:2, erro: 'email ou senha nao conferem'})
+                } else{
+                    const payload={ email};
+                    const token= jwt.sign(payload, secret,{
+                        expiresIn:'24h'
+                    })
+                    res.cookie('token',token,{httpOnly:true});
+                    res.status(200).json({status:1, auth:true,
+                         token:token,id_client: user._id,user_name:user.nome_usuario});
+                }
+            })
+
+
     }
-    
 }
