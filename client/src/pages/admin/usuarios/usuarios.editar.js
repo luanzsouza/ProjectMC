@@ -19,7 +19,10 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
-import api from '../../../services/api'
+import api from '../../../services/api';
+import CheckIcon from '@mui/icons-material/Check';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import  {getNomeUsuario} from '../../../services/auth'
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -111,8 +114,9 @@ export default function UsuariosEditar() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Usuario
+              Atualizar usuario
             </Typography>
+            {getNomeUsuario()}
           </Toolbar>
         </AppBar>
         <MenuAdmin />
@@ -131,16 +135,18 @@ export default function UsuariosEditar() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid item sm={12}>
+            <Button color="primary" variant="contained" href={'/admin/usuarios/'}><ArrowBackIcon/>Voltar</Button>
               <Paper
                 sx={{
                   p: 2,
                   display: "flex",
                   flexDirection: "column",
-                  height: 240,
+                  height: 300,
                 }}
               >
                 <Grid container spacing={3}>
                   <Grid item xs={6} sm={12}>
+                  <h2>Atualização de usuarios</h2>
                     <TextField
                       required
                       id="nome"
@@ -182,8 +188,9 @@ export default function UsuariosEditar() {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={10}>Administrador</MenuItem>
-          <MenuItem value={21}>Funcionario</MenuItem>
+          <MenuItem value={1}>Administrador</MenuItem>
+          <MenuItem value={2}>Gerente</MenuItem>
+          <MenuItem value={3}>Funcionario</MenuItem>
       
         </Select>
       </FormControl>
@@ -206,7 +213,7 @@ export default function UsuariosEditar() {
                   </Grid>
                 </Grid>
                 <Grid xs={6} sm={3}>
-                <Button variant="contained" onClick={handleSubmit}>Salvar</Button>
+                <Button variant="contained" onClick={handleSubmit}><CheckIcon/>Salvar</Button>
                 </Grid>
                 
 

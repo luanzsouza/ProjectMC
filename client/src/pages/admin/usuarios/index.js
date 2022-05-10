@@ -22,6 +22,16 @@ import TableRow from '@mui/material/TableRow';
 import api from '../../../services/api';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
+import {getNomeUsuarios,getNomeUsuarioLabel} from '../../../functions/static_data'
+import AddIcon from '@mui/icons-material/Add';
+import CachedIcon from '@mui/icons-material/Cached';
+import ClearIcon from '@mui/icons-material/Clear';
+import PersonIcon from '@mui/icons-material/Person';
+import EmailIcon from '@mui/icons-material/Email';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import DateRangeIcon from '@mui/icons-material/DateRange';
+import SettingsIcon from '@mui/icons-material/Settings';
+import  {getNomeUsuario} from '../../../services/auth'
 
 const AppBar = styled(MuiAppBar, {
  shouldForwardProp: (prop) => prop !== 'open',
@@ -92,7 +102,7 @@ export default function UsuariosListagem() {
               //onClick={toggleDrawer}
               sx={{
                 marginRight: '36px',
-              //  ...(open && { display: 'none' }),
+           
               }}
             >
               <MenuIcon />
@@ -106,7 +116,7 @@ export default function UsuariosListagem() {
             >
               Usuarios
             </Typography>
-           
+            {getNomeUsuario()}
           </Toolbar>
         </AppBar>
         <MenuAdmin/>
@@ -127,19 +137,29 @@ export default function UsuariosListagem() {
             <Grid container spacing={2}>
               <Grid item sm={12}>
             <Paper sx={{p: 2,display: "flex",flexDirection: "column",height: 500,}}>
+            <Grid container spacing={2}>
+            <Button color="primary" variant="contained" href={'/admin/usuarios/cadastrar/'} >
+              <AddIcon/>
+              Cadastrar</Button>
+            </Grid>
+            
               <h2>Listagem de usuarios</h2>
               <TableContainer component={Paper}>
+              
       <Table sx={{ minWidth: 650 }} size= "medium" aria-label="a dense table">
+        
         <TableHead>
           <TableRow>
-            <TableCell align="center">Nome</TableCell>
-            <TableCell align="center">Email</TableCell>
-            <TableCell align="center">Tipo</TableCell>
-            <TableCell align="center">Data de cadastro</TableCell>
-            <TableCell align="center">Opçoes</TableCell>
+            
+            <TableCell align="center"><PersonIcon/>    Nome</TableCell>
+            <TableCell align="center"><EmailIcon/>Email</TableCell>
+            <TableCell align="center"><BorderColorIcon/>Tipo</TableCell>
+            <TableCell align="center"><DateRangeIcon/>Data de cadastro</TableCell>
+            <TableCell align="center"><SettingsIcon/>Opçoes</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
+        
           {usuarios.map((row) => (
             <TableRow
               key={row._id}
@@ -149,16 +169,14 @@ export default function UsuariosListagem() {
                 {row.nome_usuario}
               </TableCell>
               <TableCell align="center">{row.email_usuario}</TableCell>
-              <TableCell align="center">{row.tipo_usuario===10?<>
-                <Chip color="primary" label="Administrador" />
-                
-                </>:<>
-                <Chip color="secondary" label="Funcionario" /></>}</TableCell>
+              <TableCell align="center">
+              <Chip variant="outlined" label={getNomeUsuarios(row.tipo_usuario)}color={getNomeUsuarioLabel(row.tipo_usuario) }/>
+              </TableCell>
               <TableCell align="center">{new Date(row.createdAt).toLocaleString('pt-br')}</TableCell>
               <TableCell align="center">
               <ButtonGroup  aria-label="outlined  button group">
-      <Button color="primary" href={'/admin/usuarios/editar/'+row._id}>Atualizar</Button>
-      <Button color="secondary" onClick={()=>handleDelete(row._id)} >Excluir</Button>
+      <Button color="success" variant="contained" href={'/admin/usuarios/editar/'+row._id}> <CachedIcon/>Atualizar</Button>
+      <Button color="error" variant="contained" onClick={()=>handleDelete(row._id)} ><ClearIcon/>Excluir</Button>
      
     </ButtonGroup>
 
