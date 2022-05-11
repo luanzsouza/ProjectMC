@@ -8,8 +8,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import MenuIcon from '@mui/icons-material/Menu';
-import AdminImg from '../../../assets/img/AdminImg.jpg';
+
 import MenuAdmin from '../../../components/menu-admin'
 import Footer from '../../../components/footer-admin'
 import  {getNomeUsuario} from '../../../services/auth'
@@ -17,6 +16,7 @@ import {getTipoUsuario} from '../../../services/auth';
 import DashAdmin from './admin'
 import DashGerente from './gerente'
 import DashFuncionario from './funcionario'
+import CloudIcon from '@mui/icons-material/Cloud';
 
 
 
@@ -75,7 +75,7 @@ function DashboardContent() {
               }}
             >
                <Grid >
-              <MenuIcon/>
+              <CloudIcon/>
               </Grid>
               
             </IconButton>

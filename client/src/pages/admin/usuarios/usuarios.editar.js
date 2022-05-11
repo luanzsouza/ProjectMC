@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import MenuIcon from "@mui/icons-material/Menu";
+
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
@@ -23,6 +23,8 @@ import api from '../../../services/api';
 import CheckIcon from '@mui/icons-material/Check';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import  {getNomeUsuario} from '../../../services/auth'
+import CloudIcon from '@mui/icons-material/Cloud';
+
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -105,7 +107,7 @@ export default function UsuariosEditar() {
                 //  ...(open && { display: 'none' }),
               }}
             >
-              <MenuIcon />
+              <CloudIcon />
             </IconButton>
             <Typography
               component="h1"

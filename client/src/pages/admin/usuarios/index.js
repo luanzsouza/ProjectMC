@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import MenuIcon from '@mui/icons-material/Menu';
+
 import MenuAdmin from '../../../components/menu-admin'
 import Footer from '../../../components/footer-admin'
 import Paper from "@mui/material/Paper";
@@ -32,6 +32,7 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import SettingsIcon from '@mui/icons-material/Settings';
 import  {getNomeUsuario} from '../../../services/auth'
+import CloudIcon from '@mui/icons-material/Cloud';
 
 const AppBar = styled(MuiAppBar, {
  shouldForwardProp: (prop) => prop !== 'open',
@@ -105,7 +106,7 @@ export default function UsuariosListagem() {
            
               }}
             >
-              <MenuIcon />
+              <CloudIcon />
             </IconButton>
             <Typography
               component="h1"

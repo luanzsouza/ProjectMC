@@ -1,11 +1,10 @@
 import React from 'react';
+import {Navigate } from "react-router-dom";
 
 export default function Home() {
   return (
-    <div>
-        <h1>
-           pagina inicial
-        </h1>
-    </div>
+    <Navigate
+    to={{ pathname: "/admin/login" }}
+  />
   );
 }

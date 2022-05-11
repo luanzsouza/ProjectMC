@@ -3,7 +3,7 @@ const express= require('express');
 const routes= express.Router();
 
 const Usuario= require('./controllers/usuario.controllers');
-const Produto= require('./controllers/produtos.controllers ');
+
 routes.get('/',Usuario.index);
 //rotas de usuarios
 routes.post('/api/usuarios',Usuario.create);
@@ -14,15 +14,5 @@ routes.put('/api/usuarios.update/',Usuario.updateusuario);
 routes.post('/api/usuarios/login',Usuario.login);
 routes.get('/api/usuarios/checktoken',Usuario.checktoken);
 routes.get('/api/usuarios/destroyToken',Usuario.destroyToken);
-
-//rotas de produtos
-routes.post('/api/produtos',Produto.create);
-routes.get('/api/produtos.details/:_id',Produto.details);  
-routes.get('/api/produtos',Produto.index);
-routes.delete('/api/produtos.delete/:_id',Produto.delete);
-routes.put('/api/produtos.update/',Produto.updateProduto);
-
-
-
 
 module.exports = routes;
